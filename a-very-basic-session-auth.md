@@ -1,11 +1,26 @@
-Authentication is the process of verifying if the user is in fact who he/she is declared to be. Authorization is the process of determining if the user has the privileges to access the resources he/she requested.
-This node.js code snippet demonstrated a very simple example of authentication and authorization process using session in express.js. There is a login endpoint, a logout endpoint and get post page. To see the post page, you have to login first, and your identity will be verified and saved in session. When you hit the logout endpoint, it will revoke your access by removing your identity from the session.
+* Estas notas están tomadas de este [blog](http://www.codexpedia.com/node-js/a-very-basic-session-auth-in-node-js-with-express-js/)
+* [express-session en GitHub](https://github.com/expressjs/session)
+
+* Authentication is the process of verifying if the user is in fact who he/she is declared to be. 
+* Authorization is the process of determining if the user has the privileges to access the resources he/she requested.
+
+This node.js code snippet demonstrated a very simple example of authentication and authorization process using session in express.js. 
+
+There is 
+* a login endpoint, 
+* a logout endpoint and 
+* get post page. 
+
+To see the post page, you have to login first, and your identity will be verified and saved in session. 
+
+When you hit the logout endpoint, it will revoke your access by removing your identity from the session.
 session_auth.js
 
 ```javascript
 var express = require('express'),
     app = express(),
     session = require('express-session');
+
 app.use(session({
     secret: '2C44-4D44-WppQ38S',
     resave: true,
@@ -44,14 +59,19 @@ app.get('/content', auth, function (req, res) {
  
 app.listen(3000);
 console.log("app running at http://localhost:3000");
-To run the above code from command line
 ```
 
+To run the above code from command line
+
 ```shell
-npm install express
-npm install express-session
-node session_auth.js &
+npm install --save express
+npm install --save express-session
+node authsession.js
+```
+
 Visit these urls in a browser
+
+```shell
 localhost:3000/content
 localhost:3000/login?username=amy&password=amyspassword
 localhost:3000/content
@@ -60,6 +80,7 @@ localhost:3000/content
 ```
 
 ## Code explanation
+
 Import express and express-session modules. Create express app and add session to express app as a middleware.
 
 ```javascript
