@@ -1,3 +1,4 @@
+// cookie.js
 // https://www.npmjs.com/package/cookie
 /*
 cookie: a npm module for cookie parsing and serialization
