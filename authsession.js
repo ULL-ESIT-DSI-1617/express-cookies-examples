@@ -1,6 +1,7 @@
 var express = require('express'),
     app = express(),
     session = require('express-session');
+var cookieParser = require('cookie-parser');
 var util = require("util");
 
 var instructions = `
@@ -17,6 +18,7 @@ Visit these urls in the browser:
 
 var layout = function(x) { return x+"<br />\n"+instructions; };
 
+app.use(cookieParser());
 app.use(session({
     secret: '2C44-4D44-WppQ38S',
     resave: true,
@@ -25,7 +27,7 @@ app.use(session({
  
 app.use('*', function(req, res, next) {
   console.log("Cookies :  "+util.inspect(req.cookies));
-  console.log('Request cookies:', req.cookies); 
+  console.log("session :  "+util.inspect(req.session));
   next();
 });
 
