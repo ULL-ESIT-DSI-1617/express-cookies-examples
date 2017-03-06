@@ -1,3 +1,4 @@
+// auth-example.js
 /**
  * Module dependencies.
  */
