@@ -1,10 +1,11 @@
-var express = require('express'),
+"use strict";
+let express = require('express'),
     app = express(),
     session = require('express-session');
-var cookieParser = require('cookie-parser');
-var util = require("util");
+let cookieParser = require('cookie-parser');
+let util = require("util");
 
-var instructions = `
+let instructions = `
 Visit these urls in the browser:
 <ul>
   <li> <a href="http://localhost:3000/content">localhost:3000/content</a> </li>
@@ -12,11 +13,10 @@ Visit these urls in the browser:
   <li> <a href="http://localhost:3000/login?username=amy&password=amyspassword">localhost:3000/login?username=amy&password=amyspassword</a> </li>
   <li> <a href="http://localhost:3000/content">localhost:3000/content</a> </li>
   <li> <a href="http://localhost:3000/logout">localhost:3000/logout</a> </li>
-  <li> <a href="http://localhost:3000/content">localhost:3000/content</a> </li>
 </ul>
 `;
 
-var layout = function(x) { return x+"<br />\n"+instructions; };
+let layout = function(x) { return x+"<br />\n"+instructions; };
 
 app.use(cookieParser());
 app.use(session({
@@ -25,14 +25,14 @@ app.use(session({
     saveUninitialized: true
 }));
  
-app.use('*', function(req, res, next) {
+app.use(function(req, res, next) {
   console.log("Cookies :  "+util.inspect(req.cookies));
   console.log("session :  "+util.inspect(req.session));
   next();
 });
 
 // Authentication and Authorization Middleware
-var auth = function(req, res, next) {
+let auth = function(req, res, next) {
   if (req.session && req.session.user === "amy" && req.session.admin)
     return next();
   else
