@@ -1,6 +1,7 @@
 var express = require('express'),
     app = express(),
     session = require('express-session');
+var util = require("util");
 
 app.use(session({
     secret: '2C44-4D44-WppQ38S',
@@ -8,6 +9,12 @@ app.use(session({
     saveUninitialized: true
 }));
  
+app.use('*', function(req, res, next) {
+  console.log("Cookies :  "+util.inspect(req.cookies));
+  console.log('Request cookies:', req.cookies); 
+  next();
+});
+
 // Authentication and Authorization Middleware
 var auth = function(req, res, next) {
   if (req.session && req.session.user === "amy" && req.session.admin)
@@ -27,6 +34,18 @@ app.get('/login', function (req, res) {
   }
 });
  
+app.get('/', function(req, res) {
+  res.send(`
+    Visit these urls in a browser
+    <ul>
+      <li> <a href="http://localhost:3000/content">localhost:3000/content</a> </li>
+      <li> <a href="http://localhost:3000/login?username=amy&password=amyspassword">localhost:3000/login?username=amy&password=amyspassword</a> </li>
+      <li> <a href="http://localhost:3000/content">localhost:3000/content</a> </li>
+      <li> <a href="http://localhost:3000/logout">localhost:3000/logout</a> </li>
+      <li> <a href="http://localhost:3000/content">localhost:3000/content</a> </li>
+    </ul>
+  `);
+});
 // Logout endpoint
 app.get('/logout', function (req, res) {
   req.session.destroy();

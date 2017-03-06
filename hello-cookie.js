@@ -7,7 +7,8 @@ var app = express();
 app.use(cookieParser());
 
 app.get('/cookie',function(req, res){
-     res.cookie('cookie_name', 'cookie_value', {expire : new Date() + 9999}).send(
+     res.cookie('cookie_name', 'cookie_value', 
+       {expire: new Date() + 9999}).send(
        "Cookie is set: goto to browser's console and write document.cookie.");
 });
 
@@ -16,7 +17,7 @@ app.get('/', function(req, res) {
 });
 
 app.get('/show', function(req, res) {
-  console.log("Cookies :  ", req.cookies);
+  console.log("Cookies :  "+util.inspect(req.cookies));
   res.send("Cookies :  "+util.inspect(req.cookies));
 });
 
