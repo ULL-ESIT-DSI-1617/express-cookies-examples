@@ -30,7 +30,7 @@ app.get('/', function(req, res){
            Your name: <input type="text" name="userName"><br>
            <button type="submit">Submit</button>
         </form>
-`;
+  `;
   if (req.session.userName) {
     html += '<br>Your username from your session is: ' + req.session.userName;
   }
@@ -42,4 +42,7 @@ app.post('/', function(req, res){
   res.redirect('/');
 });
 
-app.listen(8080);
+app.listen(8080, function() {
+  console.log('Example app listening at http://localhost:8080');
+
+})

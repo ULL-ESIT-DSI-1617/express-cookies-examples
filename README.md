@@ -7,7 +7,9 @@
 * `hello-cookie.js`  Ejemplo básico mostrando la API de cookies de 
 * `cookie.js` Ejemplo sin ExpressJS ni cookie-parser
 * `auth-example.js`  
-* `authsession.js`  
-* `cookie-sesion-counter.js`  
-* `how-to-use-cookies-in-express.js`  
+* `authsession.js`  Ejemplo simple de uso de sesiones
+   - Visit localhost:3000/login?username=amy&password=amyspassword
+* `cookie-sesion-counter.js` Este ejemplo usa [cookie-session](https://github.com/expressjs/cookie-session)  
+* `how-to-use-cookies-in-express.js` Usa  un formulario con `post`, cookies y `cookie-parser`  para crear persistencia
+  - [body-parser](https://github.com/expressjs/body-parser)
 * `session-and-cookie-parser.js`  
