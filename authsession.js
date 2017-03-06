@@ -36,7 +36,7 @@ app.get('/login', function (req, res) {
  
 app.get('/', function(req, res) {
   res.send(`
-    Visit these urls in a browser
+    Visit these urls in the browser:
     <ul>
       <li> <a href="http://localhost:3000/content">localhost:3000/content</a> </li>
       <li> <a href="http://localhost:3000/login?username=amy&password=amyspassword">localhost:3000/login?username=amy&password=amyspassword</a> </li>
