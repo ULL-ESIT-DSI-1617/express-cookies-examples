@@ -16,4 +16,4 @@
 * `express-simple-authentication-example` 
   - Ejemplo del [gist](https://gist.github.com/smebberson/1581536) por [Scott Mebberson](https://gist.github.com/smebberson)
 * `staticauth.js` Este ejemplo - similar a `authsession.js` muestra como controlar el acceso
-a los HTMLs generados a partir de un libro gitbook (en el directorio `gbookexample`)
+a los HTMLs generados a partir de un libro gitbook (en el directorio `gbookexample`). Para construir el libro `gitbook build gbookexample public`
