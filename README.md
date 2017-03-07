@@ -13,3 +13,5 @@
 * `how-to-use-cookies-in-express.js` Usa  un formulario con `post`, cookies y `cookie-parser`  para crear persistencia
   - [body-parser](https://github.com/expressjs/body-parser)
 * `session-and-cookie-parser.js`  
+* `express-simple-authentication-example` 
+  - Ejemplo del [gist](https://gist.github.com/smebberson/1581536) por [Scott Mebberson](https://gist.github.com/smebberson)

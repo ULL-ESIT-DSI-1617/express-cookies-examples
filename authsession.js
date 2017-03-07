@@ -46,7 +46,7 @@ app.get('/login', function (req, res) {
   if (!req.query.username || !req.query.password) {
     console.log('login failed');
     res.send('login failed');    
-  } else if(req.query.username === "amy" || req.query.password === "amyspassword") {
+  } else if(req.query.username === "amy" && req.query.password === "amyspassword") {
     req.session.user = "amy";
     req.session.admin = true;
     res.send(layout("login success!"));
