@@ -7,6 +7,10 @@ let cookieParser = require('cookie-parser');
 let path = require('path');
 let util = require("util");
 
+let bcrypt = require("bcrypt-nodejs");
+let hash = bcrypt.hashSync("amyspassword");
+console.log(`amypassword hashed = ${hash}`);
+
 let instructions = `
 Visit these urls in the browser:
 <ul>
@@ -47,7 +51,8 @@ app.get('/login', function (req, res) {
   if (!req.query.username || !req.query.password) {
     console.log('login failed');
     res.send('login failed');    
-  } else if(req.query.username === "amy" && req.query.password === "amyspassword") {
+  } else if(req.query.username === "amy" && 
+            bcrypt.compareSync(req.query.password, hash)) {
     req.session.user = "amy";
     req.session.admin = true;
     res.send(layout("login success!"));
