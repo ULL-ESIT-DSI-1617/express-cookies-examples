@@ -9,14 +9,15 @@
     "url": "git@gist.github.com:1581536.git"
   },
   "scripts": {
-	"start": "node app.js"
+    "start": "node app.js"
   },
   "engines": {
     "node": "~0.4.12"
   },
   "dependencies": {
-	"express": "2.2.x",
-	"jade": "0.20.x"
+    "express": "*",
+    "express-flash": "0.0.2",
+    "pug": "*"
   },
   "devDependencies": {}
 }

@@ -2,7 +2,7 @@ var express = require('express');
 
 var port = 8999;
 
-var app = express.createServer();
+var app = express();
 
 function checkAuth (req, res, next) {
 	console.log('checkAuth ' + req.url);
@@ -17,17 +17,25 @@ function checkAuth (req, res, next) {
 	next();
 }
 
-app.configure(function () {
+var cookieParser = require('cookie-parser');
+app.use(cookieParser());
+var session = require('express-session');
+app.use(session({
+    secret: 'example',
+    resave: true,
+    saveUninitialized: true
+}));
+ 
+var bodyParser = require('body-parser');
+app.use(bodyParser.urlencoded({ extended: false }));
 
-	app.use(express.cookieParser());
-	app.use(express.session({ secret: 'example' }));
-	app.use(express.bodyParser());
-	app.use(checkAuth);
-	app.use(app.router);
-	app.set('view engine', 'jade');
-	app.set('view options', { layout: false });
+var flash = require('express-flash');
+app.use(flash());
 
-});
+app.use(checkAuth);
+//	app.use(app.router);
+app.set('view engine', 'pug');
+app.set('view options', { layout: false });
 
 require('./lib/routes.js')(app);
 
