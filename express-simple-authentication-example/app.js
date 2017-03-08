@@ -37,8 +37,11 @@ app.use(checkAuth);
 app.set('view engine', 'pug');
 app.set('view options', { layout: false });
 
-var routes = require('./lib/routes.js');
-app.use(routes);
+var auth = require('./controllers/auth.js');
+app.use(auth);
+
+var contents = require('./controllers/contents.js');
+app.use(contents);
 
 app.listen(port);
 console.log('Node listening on port %s', port);
