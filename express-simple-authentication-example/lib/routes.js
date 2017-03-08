@@ -1,24 +1,23 @@
-var util = require('util');
+var express = require('express');
+var router = express.Router({caseSensitive: true});
 
-module.exports = function (app) {
-
-	app.get('/', function (req, res, next) {
+	router.get('/', function (req, res, next) {
 		res.render('index');
 	}); 
 
-	app.get('/welcome', function (req, res, next) {
+	router.get('/welcome', function (req, res, next) {
 		res.render('welcome');
 	});
 
-	app.get('/secure', function (req, res, next) {
+	router.get('/secure', function (req, res, next) {
 		res.render('secure');
 	});
 
-	app.get('/login', function (req, res, next) {
+	router.get('/login', function (req, res, next) {
 		res.render('login', { flash: req.flash() } );
 	});
 
-	app.post('/login', function (req, res, next) {
+	router.post('/login', function (req, res, next) {
 
 		// you might like to do a database look-up or something more scalable here
 		if (req.body.username && req.body.username === 'user' && req.body.password && req.body.password === 'pass') {
@@ -31,9 +30,9 @@ module.exports = function (app) {
 
 	});
 
-	app.get('/logout', function (req, res, next) {
+	router.get('/logout', function (req, res, next) {
 		delete req.session.authenticated;
 		res.redirect('/');
 	});
 
-};
+module.exports = router;
