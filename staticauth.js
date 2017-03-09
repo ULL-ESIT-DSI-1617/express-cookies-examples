@@ -10,13 +10,19 @@ let util = require("util");
 let bcrypt = require("bcrypt-nodejs");
 let hash = bcrypt.hashSync("amyspassword");
 console.log(`amypassword hashed = ${hash}`);
+let users = { 
+  amy : hash, 
+  juan : bcrypt.hashSync("juanpassword"),
+  antonio : bcrypt.hashSync("antoniopassword") 
+};
 
 let instructions = `
 Visit these urls in the browser:
 <ul>
   <li> <a href="http://localhost:3000/content">localhost:3000/content</a> </li>
   <li> <a href="http://localhost:3000/content/chapter1.html">localhost:3000/content/chapter1.html</a> </li>
-  <li> <a href="http://localhost:3000/login?username=juan&password=juanspassword">localhost:3000/login?username=juan&password=juanspassword</a> </li>
+  <li> <a href="http://localhost:3000/login?username=juan&password=juanpassword">localhost:3000/login?username=juan&password=juanpassword</a> </li>
+  <li> <a href="http://localhost:3000/login?username=pedro&password=pedropassword">localhost:3000/login?username=pedro&password=pedropassword</a> </li>
   <li> <a href="http://localhost:3000/login?username=amy&password=amyspassword">localhost:3000/login?username=amy&password=amyspassword</a> </li>
   <li> <a href="http://localhost:3000/logout">localhost:3000/logout</a> </li>
 </ul>
@@ -39,7 +45,7 @@ app.use(function(req, res, next) {
 
 // Authentication and Authorization Middleware
 let auth = function(req, res, next) {
-  if (req.session && req.session.user === "amy" && req.session.admin)
+  if (req.session && req.session.user in users)
     return next();
   else
     return res.sendStatus(401); // https://httpstatuses.com/401
@@ -51,14 +57,14 @@ app.get('/login', function (req, res) {
   if (!req.query.username || !req.query.password) {
     console.log('login failed');
     res.send('login failed');    
-  } else if(req.query.username === "amy" && 
-            bcrypt.compareSync(req.query.password, hash)) {
-    req.session.user = "amy";
+  } else if(req.query.username in users  && 
+            bcrypt.compareSync(req.query.password, users[req.query.username])) {
+    req.session.user = req.query.username;
     req.session.admin = true;
-    res.send(layout("login success!"));
+    res.send(layout("login success! user "+req.session.user));
   } else {
     console.log(`login ${util.inspect(req.query)} failed`);    
-    res.send(layout(`login ${util.inspect(req.query)} failed`));    
+    res.send(layout(`login ${util.inspect(req.query)} failed. You are ${req.session.user || 'not logged'}`));    
   }
 });
  
