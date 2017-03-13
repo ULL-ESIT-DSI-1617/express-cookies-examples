@@ -23,6 +23,7 @@ Visit these urls in the browser:
   <li> <a href="http://localhost:3000/content/chapter1.html">localhost:3000/content/chapter1.html</a> </li>
   <li> <a href="http://localhost:3000/login?username=juan&password=juanpassword">localhost:3000/login?username=juan&password=juanpassword</a> </li>
   <li> <a href="http://localhost:3000/login?username=pedro&password=pedropassword">localhost:3000/login?username=pedro&password=pedropassword</a> </li>
+  <li> <a href="http://localhost:3000/login?username=antonio&password=antoniopassword">localhost:3000/login?username=antonio&password=antoniopassword</a> </li>
   <li> <a href="http://localhost:3000/login?username=amy&password=amyspassword">localhost:3000/login?username=amy&password=amyspassword</a> </li>
   <li> <a href="http://localhost:3000/logout">localhost:3000/logout</a> </li>
 </ul>
